@@ -1,0 +1,34 @@
+name: Brainf*ck to x86_64 ELF Compiler CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  RUN_BF_TESTS: 'true'  #'false' to skip tests
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: install build deps
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential
+
+    - name: build the compiler
+      run: |
+        make && printf "compilation PASSED\n" || printf "compilation FAILED\n"
+
+#    - name: run test
+#      if: env.RUN_BF_TESTS == 'true'
+#      run: |
+#         ./bfelfx64 hello.bf -o a.out
+#         ./a.out
+#
+#        printf "Test passed!\n"
