@@ -28,7 +28,7 @@ This is a minimal `Brainf*ck` to x86-64 ELF compiler written in C. It transforms
 
 ## Important design choices
 
-- **Tape size** is fixed at 30000 bytes – this can be changed in the source.
+- **Tape size** is fixed at 30000 bytes (this can be changed in the source).
 - This implementation uses minimal instruction sequences to keep the binary small and fast.
 - No external libraries or runtime dependencies are required.
 - The resulting ELF is a statically linked, self contained native program.
