@@ -29,6 +29,7 @@ jobs:
       if: env.RUN_BF_TESTS == 'true'
       run: |
          ./bfelfx64 hello.bf -o a.out
+         chmod +x a.out
          expected="Hello World!"
          capture=$(./a.out)
          [ "$capture" = "$expected" ] && printf "test PASSED\n" || printf "test FAILED\n"
