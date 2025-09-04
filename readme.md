@@ -38,7 +38,7 @@ This is a minimal `Brainf*ck` to x86-64 ELF compiler written in C. It transforms
 - Tape size configurable at compile time or runtime.
 - Additional optimizations like command merging (`+++` -> `add`) or loop unrolling.
 - Support for more advanced ELF features like relocation or symbol tables.
-- Target other architectures or OS'es.
+- Target other architectures.
 
 ## Code structure
 
