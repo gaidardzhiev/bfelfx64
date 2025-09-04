@@ -25,10 +25,10 @@ jobs:
       run: |
         make && printf "compilation PASSED\n" || printf "compilation FAILED\n"
 
-#    - name: run test
-#      if: env.RUN_BF_TESTS == 'true'
-#      run: |
-#         ./bfelfx64 hello.bf -o a.out
-#         ./a.out
-#
-#        printf "Test passed!\n"
+    - name: run test
+      if: env.RUN_BF_TESTS == 'true'
+      run: |
+         ./bfelfx64 hello.bf -o a.out
+         expected="Hello World!"
+         capture=$(./a.out)
+         [ "$capture" = "$expected" ] && printf "test PASSED\n" || printf "test FAILED\n"
