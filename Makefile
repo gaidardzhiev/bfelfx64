@@ -1,5 +1,5 @@
 CC:=$(shell command -v musl-gcc 2>/dev/null || command -v gcc 2>/dev/null || command -v clang 2>/dev/null)
-CFLAGS=-static -no-pie -g
+FLAGS=-static -no-pie -g
 BIN=bfelfx64
 
 ifeq ($(strip $(CC)),)
@@ -9,7 +9,7 @@ endif
 all: $(BIN)
 
 $(BIN): %: %.c
-	$(CC) -o $@ $< $(CFLAGS)
+	$(CC) -o $@ $< $(FLAGS)
 
 install:
 	cp $(BIN) /usr/bin/$(BIN)
