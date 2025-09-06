@@ -292,8 +292,9 @@ void compile(const char *src, const char *out_path) {
 			size_t after_jne_pos = code_pos(&ctx.code);
 			int32_t forward_rel = (int32_t)(after_jne_pos - (loop_start_jmp_pos + 4));
 			buf_patch32_at(&ctx.code.code, loop_start_jmp_pos, (uint32_t)forward_rel);
-			int32_t back_rel = (int32_t)(loop_start_jmp_pos - (jmp_back_pos + 4));
-			buf_patch32_at(&ctx.code.code, jmp_back_pos, (uint32_t)back_rel);
+			size_t loop_top_pos = loop_start_jmp_pos - (2 + 5);
+int32_t back_rel = (int32_t)(loop_top_pos - (jmp_back_pos + 4));
+buf_patch32_at(&ctx.code.code, jmp_back_pos, (uint32_t)back_rel);
 			break;
 		}
 		default:
@@ -362,7 +363,7 @@ void compile(const char *src, const char *out_path) {
 	le64(P2 + 0x08, 0);//p_offset = 0 since not in file (bss)
 	le64(P2 + 0x10, tape_vaddr);//p_vaddr = tape address
 	le64(P2 + 0x18, tape_vaddr);//p_paddr
-	le64(P2 + 0x20, TAPE_SIZE);//p_filesz = 0 bytes in file (bss)
+	le64(P2 + 0x20,  0 );//p_filesz = 0 bytes in file (bss)
 	le64(P2 + 0x28, TAPE_SIZE);//p_memsz = size of tape
 	le64(P2 + 0x30, page_size);//p_align
 	write_file(out_path, &file);
