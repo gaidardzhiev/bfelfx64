@@ -1,4 +1,4 @@
-# `Brainf*ck` x86-64 ELF Compiler
+# `Brainf*ck` to x86-64 ELF Compiler
 
 This is a minimal `Brainf*ck` to x86-64 ELF compiler written in C. It transforms `Brainf*ck` source code into a standalone Linux x86-64 ELF executable that runs natively without interpretation.
 
