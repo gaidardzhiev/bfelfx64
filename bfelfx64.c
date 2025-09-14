@@ -299,8 +299,8 @@ void compile(const char *src, const char *out_path) {
 			int32_t forward_rel = (int32_t)(after_jne_pos - (loop_start_jmp_pos + 4));
 			buf_patch32_at(&ctx.code.code, loop_start_jmp_pos, (uint32_t)forward_rel);
 			size_t loop_top_pos = loop_start_jmp_pos - (2 + 5);
-int32_t back_rel = (int32_t)(loop_top_pos - (jmp_back_pos + 4));
-buf_patch32_at(&ctx.code.code, jmp_back_pos, (uint32_t)back_rel);
+			int32_t back_rel = (int32_t)(loop_top_pos - (jmp_back_pos + 4));
+			buf_patch32_at(&ctx.code.code, jmp_back_pos, (uint32_t)back_rel);
 			break;
 		}
 		default:
