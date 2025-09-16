@@ -1,5 +1,9 @@
 #!/bin/sh
 
+G='\033[0;32m'
+R='\033[0;31m'
+N='\033[0m'
+
 ARCH=$(uname -m)
 
 [ ! "$ARCH" = "x86_64" ] && exit 1
@@ -11,10 +15,11 @@ fprint() {
 }
 
 test_torture() {
-	./bfelfx64 tests/torture.bf -o torture
-	chmod +x torture
-	capture=$(./torture)
-	[ "$capture" = "=ZaadlLdgaYm!#" ] && {
+	./bfelfx64 tests/torture.bf -o torture_test
+	chmod +x torture_test
+	capture=$(./torture_test)
+	expected="=ZaadlLdgaYm!#"
+	[ "$capture" = "$expected" ] && {
 		fprint "Torture Test" "${G}PASSED${N}";
 		return 0;
 	} || {
@@ -23,4 +28,6 @@ test_torture() {
 	}
 }
 
-test_torture
+{ test_torture; return="$?"; } || exit 1
+
+[ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
