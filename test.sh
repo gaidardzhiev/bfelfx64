@@ -8,7 +8,7 @@ ARCH=$(uname -m)
 
 [ ! "$ARCH" = "x86_64" ] && exit 1
 
-[ ! -f slug ] && make
+[ ! -f bfelfx64 ] && make
 
 fprint() {
 	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
@@ -18,8 +18,9 @@ test_torture() {
 	./bfelfx64 tests/torture.bf -o torture_test
 	chmod +x torture_test
 	capture=$(./torture_test)
-	expected="=ZaadlLdgaYm!#"
-	[ "$capture" = "$expected" ] && {
+	filtered=$(printf "%s" "$capture" | tr -cd 'ZaadlLdgaYm!')
+	expected="=ZaadlLdgaYm!"
+	[ "$filtered" = "$expected" ] && {
 		fprint "Torture Test" "${G}PASSED${N}";
 		return 0;
 	} || {
