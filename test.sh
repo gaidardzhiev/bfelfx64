@@ -18,7 +18,7 @@ test_torture() {
 	./bfelfx64 tests/torture.bf -o torture_test
 	chmod +x torture_test
 	capture=$(./torture_test)
-	filtered=$(printf "%s" "$capture" | tr -cd 'ZaadlLdgaYm!')
+	filtered=$(printf "%s" "$capture" | tr -cd '=ZaadlLdgaYm!')
 	expected="=ZaadlLdgaYm!"
 	[ "$filtered" = "$expected" ] && {
 		fprint "Torture Test" "${G}PASSED${N}";
