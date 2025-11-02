@@ -6,21 +6,21 @@ N='\033[0m'
 
 ARCH=$(uname -m)
 
-[ ! "$ARCH" = "x86_64" ] && { printf "unsupported architecture\n"; exit 1; }
+[ ! "${ARCH}" = "x86_64" ] && { printf "unsupported architecture\n"; exit 1; }
 
 [ ! -f bfelfx64 ] && make
 
 fprint() {
-	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" "$2"
+	 printf "[%s] Test: %-20s Result: %b\n" "$(date '+%Y-%m-%d %H:%M:%S')" "${1}" "${2}"
 }
 
 test_torture() {
 	./bfelfx64 tests/torture.bf -o torture_test
 	chmod +x torture_test
 	capture=$(./torture_test)
-	filtered=$(printf "%s" "$capture" | tr -cd '=ZaadlLdgaYm!')
+	filtered=$(printf "%s" "${capture}" | tr -cd '=ZaadlLdgaYm!')
 	expected="=ZaadlLdgaYm!"
-	[ "$filtered" = "$expected" ] && {
+	[ "${filtered}" = "${expected}" ] && {
 		fprint "Torture Test" "${G}PASSED${N}";
 		return 0;
 	} || {
@@ -29,6 +29,6 @@ test_torture() {
 	}
 }
 
-{ test_torture; return="$?"; } || exit 1
+{ test_torture; return="${?}"; } || exit 1
 
-[ "$return" -eq 0 ] 2>/dev/null || printf "%s\n" "$return"
+[ "${return}" -eq 0 ] 2>/dev/null || printf "%s\n" "${return}"
